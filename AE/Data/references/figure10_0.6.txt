@@ -1,0 +1,9 @@
+Figure 10: Performance (Throughput:Million ops/sec) scalability under different contention levels.(theta=0.6)
+thread	Eunomia	HTM-B+Tree	Masstree	HTM-Masstree	
+1.0	2.40	3.56		1.72		1.67
+2.0	5.44	7.50		3.12		1.95
+4.0	9.29	15.68		5.83		2.79
+8.0	17.73	17.58		10.17		3.45
+12.0	26.08	10.36		13.40		3.82
+16.0	32.69	6.07		16.13		3.83
+20.0	40.43	8.00		17.58		3.62

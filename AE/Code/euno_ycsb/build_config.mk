@@ -1,0 +1,13 @@
+SOURCES=db/builder.cc db/c.cc db/dbformat.cc db/db_impl.cc db/db_iter.cc db/dbrotx.cc db/dbtables.cc db/dbtransaction.cc db/dbtx.cc db/delset.cc db/epoch.cc db/filename.cc db/gcqueue.cc db/hashtable.cc db/log_reader.cc db/log_writer.cc db/memtable.cc db/nodebuf.cc db/objpool.cc db/rcu.cc db/repair.cc db/rmpool.cc db/rmqueue.cc db/table_cache.cc db/txleveldb.cc db/txskiplist.cc db/version_edit.cc db/version_set.cc db/write_batch.cc memstore/memstore_skiplist.cc memstore/secondindex_stringbplustree.cc memstore/secondindex_uint64bplustree.cc persistent/log.cc persistent/pbuf.cc persistent/tbuf.cc silo_benchmark/bench.cc silo_benchmark/thread.cc silo_benchmark/varint.cc table/block_builder.cc table/block.cc table/filter_block.cc table/format.cc table/iterator.cc table/merger.cc table/table_builder.cc table/table.cc table/two_level_iterator.cc util/arena.cc util/bloom.cc util/bloomfilter.cc util/cache.cc util/coding.cc util/comparator.cc util/crc32c.cc util/env.cc util/env_posix.cc util/filter_policy.cc util/hash.cc util/histogram.cc util/logging.cc util/murmurhash.cc util/options.cc util/rtm_arena.cc util/rtm.cc util/rwlock.cc util/status.cc  port/port_posix.cc
+MEMENV_SOURCES=helpers/memenv/memenv.cc
+CC=gcc-4.8
+CXX=g++-4.8
+PLATFORM=OS_LINUX
+PLATFORM_LDFLAGS=-pthread -mrtm
+PLATFORM_LIBS= -lsnappy -lssmalloc
+PLATFORM_CCFLAGS=  -pthread -DOS_LINUX -mrtm -DLEVELDB_PLATFORM_POSIX -DSNAPPY
+PLATFORM_CXXFLAGS=  -pthread -DOS_LINUX -mrtm -DLEVELDB_PLATFORM_POSIX -DSNAPPY
+PLATFORM_SHARED_CFLAGS=-fPIC
+PLATFORM_SHARED_EXT=so
+PLATFORM_SHARED_LDFLAGS=-shared -Wl,-soname -Wl,
+PLATFORM_SHARED_VERSIONED=true

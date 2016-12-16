@@ -1,0 +1,7 @@
+Figure 15(a):Throughput(10K ops/sec) with increasing contention rate (decreasing warehouse number)
+WH	Eunomia	HTM-B+Tree	
+20.0	155.79	0.00
+10.0	128.43	125.79
+5.0	80.01	24.68
+2.0	64.82	9.48
+1.0	33.62	1.51

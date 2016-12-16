@@ -1,0 +1,9 @@
+Figure 11: Performance (Throughput:Million ops/sec) under different get/put ratios in Zipfian Distribution (read ratio=0)
+thread	Eunomia	HTM-B+Tree	
+1.0	2.31	3.47
+2.0	5.18	6.98
+4.0	8.92	11.17
+8.0	16.06	1.48
+12.0	20.33	2.03
+16.0	23.64	2.21
+20.0	27.65	2.83

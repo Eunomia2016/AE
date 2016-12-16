@@ -1,0 +1,9 @@
+Figure 12: Performance (Throughput:Million ops/sec) with different input distributions under high contention (distribution=Poisson)
+thread	Eunomia	HTM-B+Tree	
+1.0	2.40	3.72
+2.0	4.45	7.28
+4.0	8.64	1.88
+8.0	9.68	0.98
+12.0	13.75	1.43
+16.0	17.69	1.83
+20.0	19.82	2.56

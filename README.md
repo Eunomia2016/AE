@@ -1,0 +1,141 @@
+# A.1 Abstract
+
+This artifact contains all the source codes, executable files, and
+shell scripts of the current existing Eunomia’s implementation. It
+supports the throughput results in Section 5 (Figure 8,10,11,12)
+of our PPoPP 2017 paper Eunomia: Scaling Concurrent Search
+Trees under Contention Using HTM. To validate the results,
+build the artifacts, run the test scripts and check the results pre-
+sented in text output files and tables.
+
+# A.2 Description
+
+## A.2.1 Check-list (artifact meta information)
+
+* Algorithm: Eunomia, HTM-B+Tree
+* Program: C/C++ code
+* Compilation: gcc 4.8.4 with -O2 flag
+* Binary: C/C++ executables
+* Data set: Customized YCSB benchmark
+* Run-time environment: Ubuntu 14.04 LTS x86-64 or newer Ubuntu
+versions
+* Hardware: Dell PowerEdge R730, Intel Xeon CPU E5-2650, 2 sock-
+ets, 20 cores, 256GB DRAM
+* Output: Runtime and/or throughput
+* Experiment workflow: Install hardware/software dependencies;
+compile the program; run the scripts; observe the results
+* Publicly available?: Yes
+
+##A.2.2 How delivered
+
+The artifact is released through the public GitHub code repository
+available at: https://github.com/Eunomia2016/AE
+
+##A.2.3 Hardware dependencies
+
+Eunomia requires Intel CPU with TSX support, NUMA architec-
+ture, and at least 2 sockets with 20 hardware cores in total. The ar-
+tifact uses POSIX threads for concurrency and pins each threads to
+a specific hardware core with pthread setaffinity np; hyper-
+threading is turned off. Eunomia also requires processors support
+atomic synchronization primitives.
+
+##A.2.4 Software dependencies
+
+* jemalloc memory allocator.
+* libnuma-dev library.
+* gcc with built-in functions for atomic memory access, which
+are included in gcc 4.1 or later.
+* gcc with Intel RTM and HLE intrinsics, which are included in
+gcc 4.8 or later.
+* Linux Kernel 3.19.0 or later versions.
+* glibc 2.19 or later versions.
+* python 2.7.6 or later versions.
+
+#A.3 Installation
+We here provide installation steps to present the build process,
+including installing all dependent libraries and compiling the
+programs.
+
+**Enter Top directory**
+
+	$ cd AE/
+	$ export TOP=$(pwd -P) #default directory
+
+**Activate the TSX support of CPU and install the dependent
+libraries**
+
+	$ cd $TOP/Script/
+	$ ./install_dependency.sh
+
+**Build Eunomia & HTM-B+Tree with ycsb benchmark**
+
+	$ cd $TOP/Code/euno_ycsb/
+	$ ./make_ycsb.sh
+
+# A.4 Experiment workflow
+For the convenience of the artifact evaluation, we provide a script called `ppopp.sh` which reproduces the results of Section 5 described in the paper. Then the results will be stored in the output text files.	
+
+	$ cd $TOP/Script/
+	$ ./ppopp.sh <index> <iterations>
+
+The first parameter `index` is the index of results to be reproduced. The second parameter `iterations` is the number of iterations to run. The eventual result will be the average value of
+multiple iterations. Each iterations will be executed for about 20 minutes.	
+
+**Results in Section 5.2 (Figure 8)**
+
+	$ cd $TOP/Script/
+	$ ./ppopp.sh 0 3 #index is 0, iteration is 3
+	#check results
+	$ cat $TOP/Data/forms/figure8.txt
+	#you could run ./check_reference.sh 0 to check
+	#the pre-generated results for reference
+
+**Results in Section 5.3 (Figure 10)**
+
+	$ ./ppopp.sh 1 3
+	#check results, theta=0.2
+	$ cat $TOP/Data/forms/figure10_0.2.txt
+	#check results, theta=0.6
+	$ cat $TOP/Data/forms/figure10_0.6.txt
+	#check results, theta=0.9
+	$ cat $TOP/Data/forms/figure10_0.9.txt
+	#check results, theta=0.99
+	$ cat $TOP/Data/forms/figure10_0.99.txt
+	#you could run ./check_reference.sh 1 to check
+	#the pre-generated results for reference
+
+**Results in Section 5.4 (Figure 11)**
+
+	$ ./ppopp.sh 2 3
+	#check results, read ratio=0
+	$ cat $TOP/Data/forms/figure11_0.txt
+	#check results, read ratio=0.2
+	$ cat $TOP/Data/forms/figure11_0.2.txt
+	#check results, read ratio=0.5
+	$ cat $TOP/Data/forms/figure11_0.5.txt
+	#check results, read ratio=0.7
+	$ cat $TOP/Data/forms/figure11_0.7.txt
+	#you could run ./check_reference.sh 2 to check
+	#the pre-generated results for reference
+
+**Results in Section 5.5 (Figure 12)**	
+
+	$ ./ppopp.sh 3 3
+	#check results, distribution type=Normal
+	$ cat $TOP/Data/forms/figure12_Normal.txt
+	#check results, distribution type=Poisson
+	$ cat $TOP/Data/forms/figure12_Poisson.txt
+	#check results, distribution type=Self -Similar
+	$ cat $TOP/Data/forms/figure12_Self -Similar.txt
+	#you could run ./check_reference.sh 3 to check
+	#the pre-generated results for reference
+
+# A.5 Evaluation and expected result
+The expected results include both runtime and/or throughput. It should reproduce the results similar to that shown in Section 5 (Figure 8,10,11,12).
+
+Here we provide a sample of expected results and experiment
+comparison, which reproduces the data shown in Section 5.2 (Figure 8). Figure (a) is the graph presented in the paper. Figure (b) presents the datagenerated by a random run on atest platform (Dell PowerEdge R730). Due to the difference of hardware, the absolute number is not the same, especially when HTM-B+Tree is under the marginal contention rate (θ = 0.7). However, the speedup of Eunomia compared to other versions is clear and stable. Under θ = 0.99, Eunomia in Figure (a) generates 11.04X speedup over HTM-
+B+Tree; and the speedup is 11.16X in Figure (b), with only 2% deviation.
+
+![Figure](http://p1.bpimg.com/4851/9c5f819a793692fe.jpg)

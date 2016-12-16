@@ -1,0 +1,9 @@
+Figure 15(b):Throughput(10K ops/sec) with increasing number of threads (warehouse number is fixed to 1)
+thread	Eunomia	HTM-B+Tree	
+1.0	11.76	13.29
+2.0	14.81	14.44
+4.0	20.68	5.35
+8.0	26.38	2.41
+12.0	30.11	1.92
+16.0	32.72	1.67
+20.0	32.84	1.51
